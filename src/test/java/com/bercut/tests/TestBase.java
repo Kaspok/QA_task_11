@@ -6,6 +6,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import static com.codeborne.selenide.Selenide.open;
+import static io.qameta.allure.Allure.step;
+
 public class TestBase {
 
     @BeforeAll
@@ -16,6 +19,9 @@ public class TestBase {
 
         Configuration.browserCapabilities = capabilities;
         Configuration.startMaximized = true;
+        step("Открываем начальную страницу", () -> {
+            open("https://www.bercut.com/");
+        });
     }
 
     @AfterEach

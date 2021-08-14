@@ -45,7 +45,7 @@ public class Attach {
                 + "' type='video/mp4'></video></body></html>";
     }
 
-    public static URL getVideoUrl(String sessionId) {
+    private static URL getVideoUrl(String sessionId) {
         String videoUrl = "https://selenoid.autotests.cloud/video/" + sessionId + ".mp4";
 
         try {
@@ -56,7 +56,7 @@ public class Attach {
         return null;
     }
 
-    public static String getSessionId() {
+    private static String getSessionId() {
         return ((RemoteWebDriver) getWebDriver()).getSessionId().toString();
     }
 }

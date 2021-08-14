@@ -65,7 +65,6 @@ public class TestNavigationBar extends TestBase {
             $(".services-top").shouldHave(text("услуги"));
             $(".services-top").$(".description").shouldHave(text("комплексные услуги и решения " +
                     "с дополнительными сервисами «под ключ»"));
-            System.out.println();
         });
     }
 
@@ -121,6 +120,22 @@ public class TestNavigationBar extends TestBase {
                 " продуктов Bercut', возвращаемся на начальную страницу", () -> {
             $(".title", 1).shouldHave(text("добро пожаловать в службу поддержки продуктов Bercut"));
             switchTo().window(0);
+        });
+    }
+
+    @Test
+    @Order(8)
+    @DisplayName("Проверяем описание вкладки 'пресс-центр'")
+    void testTabsPressCenter() {
+        step("Открываем вкладку 'пресс-центр'", () -> {
+            $(".menu-top").$(byText("пресс-центр")).click();
+        });
+        step("Проверяем, что в описании вкладки содержится наименование вкладки 'пресс-центр' и " +
+                "текст: операторы связи и их партнеры, использующие продукты Bercut", () -> {
+            SelenideLogger.addListener("allure", new AllureSelenide());
+            $(".news-top").shouldHave(text("пресс-центр"));
+            $(".news-top").$(".description").shouldHave(text("для связи с пресс-центром пишите на " +
+                    "pr@bercut.com"));
         });
     }
 

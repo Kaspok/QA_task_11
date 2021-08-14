@@ -3,16 +3,23 @@ package com.bercut.tests;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.switchTo;
 import static io.qameta.allure.Allure.step;
+import static org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
+@TestMethodOrder(OrderAnnotation.class)
+@DisplayName("Тестирования панели навигации")
 public class TestNavigationBar extends TestBase {
 
     @Test
+    @Order(1)
     @DisplayName("Проверка наличии вкладок на начальной странице")
     void testHomePage() {
         step("Проверяем, что на панели навигации присутствуют: продукты, услуги, клиенты, о нас, карьера," +
@@ -29,6 +36,7 @@ public class TestNavigationBar extends TestBase {
     }
 
     @Test
+    @Order(2)
     @DisplayName("Проверяем описание вкладки 'продукты'")
     void testTabsProduct() {
         step("Открываем вкладку 'продукты'", () -> {
@@ -45,6 +53,7 @@ public class TestNavigationBar extends TestBase {
     }
 
     @Test
+    @Order(3)
     @DisplayName("Проверяем описание вкладки 'услуги'")
     void testTabsServices() {
         step("Открываем вкладку 'услуги'", () -> {
@@ -61,6 +70,7 @@ public class TestNavigationBar extends TestBase {
     }
 
     @Test
+    @Order(4)
     @DisplayName("Проверяем описание вкладки 'клиенты'")
     void testTabsClients() {
         step("Открываем вкладку 'клиенты'", () -> {
@@ -76,6 +86,7 @@ public class TestNavigationBar extends TestBase {
     }
 
     @Test
+    @Order(5)
     @DisplayName("Проверяем описание вкладки 'о нас'")
     void testTabsAboutUs() {
         step("Открываем вкладку 'о нас'", () -> {
@@ -85,4 +96,32 @@ public class TestNavigationBar extends TestBase {
             $(".about-top").shouldHave(text("о нас"));
         });
     }
+
+    @Test
+    @Order(6)
+    @DisplayName("Проверяем описание вкладки 'карьера'")
+    void testTabsCareer() {
+        step("Открываем вкладку 'карьера'", () -> {
+            $(".menu-top").$(byText("Карьера")).click();
+        });
+        step("Проверяем, что в описании вкладки содержится наименование вкладки 'карьера'", () -> {
+            $(".job-top").shouldHave(text("карьера"));
+        });
+    }
+
+    @Test
+    @Order(7)
+    @DisplayName("Проверяем переход по вкладке 'поддержка'")
+    void testTabsSupport() {
+        step("Нажимаем вкладку 'поддержка' и переходим на новую страницу", () -> {
+            $(".menu-top").$(byText("поддержка")).click();
+            switchTo().window(1);
+        });
+        step("Проверяем, что на новой открытой вкладке присутствует текст 'Добро пожаловать в службу поддержки" +
+                " продуктов Bercut', возвращаемся на начальную страницу", () -> {
+            $(".title", 1).shouldHave(text("добро пожаловать в службу поддержки продуктов Bercut"));
+            switchTo().window(0);
+        });
+    }
+
 }

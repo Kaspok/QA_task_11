@@ -9,8 +9,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.switchTo;
+import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 import static org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
@@ -22,6 +21,9 @@ public class TestNavigationBar extends TestBase {
     @Order(1)
     @DisplayName("Проверка наличии вкладок на начальной странице")
     void testHomePage() {
+        step("Открываем начальную страницу", () -> {
+            open("https://www.bercut.com/");
+        });
         step("Проверяем, что на панели навигации присутствуют: продукты, услуги, клиенты, о нас, карьера," +
                 "поддержка, пресс-центр", () -> {
             SelenideLogger.addListener("allure", new AllureSelenide());

@@ -6,22 +6,24 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import static com.codeborne.selenide.Selenide.open;
-import static io.qameta.allure.Allure.step;
+import static com.bercut.config.SelenoidLogPass.selenoidLogPassConfig;
+import static java.lang.String.format;
 
 public class TestBase {
 
     @BeforeAll
     static void setup() {
+        String login = selenoidLogPassConfig.login(),
+                password = selenoidLogPassConfig.password();
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", true);
 
         Configuration.browserCapabilities = capabilities;
         Configuration.startMaximized = true;
-        step("Открываем начальную страницу", () -> {
-            open("https://www.bercut.com/");
-        });
+        if (System.getProperty("selenoidStatus").equals("enabled")) {
+            Configuration.remote = format("https://%s:%s@" + System.getProperty("selenoidUrl"), login, password);
+        }
     }
 
     @AfterEach

@@ -21,10 +21,9 @@ public class TestBase {
 
         Configuration.browserCapabilities = capabilities;
         Configuration.startMaximized = true;
-//        if (System.getProperty("selenoidStatus").equals("enabled")) {
-//            Configuration.remote = format("https://%s:%s@" + System.getProperty("selenoidUrl"), login, password);
-//        }
-        Configuration.remote = format("https://%s:%s@" + System.getProperty("selenoidUrl"), login, password);
+        if (System.getProperty("selenoidStatus").equals("enabled")) {
+            Configuration.remote = format("https://%s:%s@" + System.getProperty("selenoidUrl"), login, password);
+        }
     }
 
     @AfterEach

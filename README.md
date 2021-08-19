@@ -1,6 +1,6 @@
 # Проверка панели навигации на сайте - https://www.bercut.com/
 
-![img.png](resourcesForReadme/img.png)
+![img_5.png](resourcesForReadme/img_5.png)
 ___
 
 ## Запуск тестов

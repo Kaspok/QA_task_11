@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 @DisplayName("Тестирования панели навигации")
 public class TestNavigationBar extends TestBase {
 
-    TopBar topBar = new TopBar();
+    private TopBar topBar = new TopBar();
 
     @Test
     @Order(1)

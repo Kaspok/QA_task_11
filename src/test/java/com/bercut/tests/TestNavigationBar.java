@@ -126,9 +126,9 @@ public class TestNavigationBar extends TestBase {
             open("https://www.bercut.com/");
         });
         topBar.navigateTo(MenuItem.SUPPORT);
-        switchTo().window(1);
         step("Проверяем, что на новой открытой вкладке присутствует текст 'Добро пожаловать в службу поддержки" +
                 " продуктов Bercut', возвращаемся на начальную страницу", () -> {
+            switchTo().window(1);
             $(".title", 1).shouldHave(text("добро пожаловать в службу поддержки продуктов Bercut"));
             switchTo().window(0);
         });
